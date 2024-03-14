@@ -25,3 +25,26 @@ def reset_database():
 
 reset_database()
 ipdb.set_trace()
+
+
+# === Test cases
+
+Department.get_all()
+#==> [<Department 1: Payroll, Building A, 5th Floor>, <Department 2: Human Resources, Building C, East Wing>]
+
+payroll = Department.find_by_name("Payroll")
+payroll
+#==> <Department 1: Payroll, Building A, 5th Floor>
+
+payroll.location = 7
+#==> *** ValueError: Location must be a non-empty string
+
+
+# Let's try to set an invalid department id for an employee:
+
+employee = Employee.find_by_id(1)
+employee
+#==> <Employee 1: Amir, Accountant, Department ID: 1>
+
+employee.department_id = 1000
+#==> *** ValueError: department_id must reference a department in the database
